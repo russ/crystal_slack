@@ -1,17 +1,34 @@
 require "json"
 
 class Slack::Message
-  JSON.mapping({
-    text:             String,
-    channel:          {type: String, nilable: true},
-    icon_emoji:       {type: String, nilable: true},
-    icon_url:         {type: String, nilable: true},
-    username:         {type: String, nilable: true},
-    attachments:      {type: Array(JSON::Any), nilable: true},
-    response_type:    {type: String, nilable: true},
-    delete_original:  {type: Bool, nilable: true},
-    replace_original: {type: Bool, nilable: true},
-  })
+  include JSON::Serializable
+
+  @[JSON::Field]
+  property text : String
+
+  @[JSON::Field]
+  property channel : String?
+
+  @[JSON::Field]
+  property icon_emoji : String?
+
+  @[JSON::Field]
+  property icon_url : String?
+
+  @[JSON::Field]
+  property username : String?
+
+  @[JSON::Field]
+  property attachments : Array(JSON::Any)?
+
+  @[JSON::Field]
+  property response_type : String?
+
+  @[JSON::Field]
+  property delete_original : Bool?
+
+  @[JSON::Field]
+  property replace_original : Bool?
 
   def initialize(@text : String, @channel = nil, @icon_emoji = nil, @icon_url = nil, @username = nil, @attachments = nil, @response_type = nil, @delete_original = nil, @replace_original = nil)
   end
